@@ -57,7 +57,7 @@ void drawInterface()
 {
     glPushMatrix();
     glClearColor(1.f, 1.f, 1.f, 1.f);
-    drawText(400.f, 290.f, "        Smart Village Project\n      For: Dr. Suaad Baawidan\n\n By: Alanoud, Lujain, Jood, Taif\n\n\n          Press 'L' to start!");
+    drawText(400.f, 290.f, "         Village Scene Project\n      For: Dr. Suaad Baawidan\n\n By: Alanoud, Jood \n\n\n          Press 'L' to start!");
     glPopMatrix();
 }
 
