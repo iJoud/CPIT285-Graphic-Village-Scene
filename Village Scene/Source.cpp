@@ -87,6 +87,116 @@ void star(GLfloat x, GLfloat y, GLfloat z)
     glPopMatrix();
 }
 
+// Moon
+void Moon_Model() {
+    glPushMatrix();
+    glColor3f(1.25, 0.924, 0.930);
+    glTranslatef(900, 430, -16);
+    glutSolidSphere(48, 32, 32);
+    glPopMatrix();
+
+    glPushMatrix();
+    glColor3f(0.2, 0.30588, 0.50196);
+    glTranslatef(880, 440, -16);
+    glutSolidSphere(40, 32, 32);
+    glPopMatrix();
+
+}
+
+
+
+/// *** Sun_Model **///
+void Sun_Model() {
+    glPushMatrix();
+    glTranslatef(500, 0, -16);
+    glutSolidSphere(30, 32, 32);
+    glPopMatrix();
+
+}
+void Moving_Sun_Model() {
+    glPushMatrix();
+    glRotatef(-sun_spin, 0, 0, -.009);
+    Sun_Model();
+    glPopMatrix();
+
+}
+
+
+
+// drawing airplane model 
+void Airplane_Model()
+{
+    // static because we need the value between frames
+    static float xx = -500;
+    float y = 400;
+    xx += 4;
+    if (xx >= 500) xx = -500;
+    glPushMatrix();
+    glLoadIdentity();
+    glDisable(GL_LIGHTING);
+
+    // drawing the maing part of the airplane
+    glLoadIdentity();
+    glTranslatef(500 + xx, y, 0);
+    glRotatef(90, 0, 0, 1);
+    glScalef(5, 30, 10);
+    glutSolidSphere(3, 20, 20);
+
+    // drawing black windows
+    glColor3f(0.f, 0.f, 0.f);
+    for (int x = -30; x <= 30; x += 30)
+    {
+        glLoadIdentity();
+        glTranslatef(500 + x + xx, y + 7, 0);
+        glScalef(20, 10, 10);
+        glutSolidCube(1);
+    }
+    // drawing black window (the big one)
+    glLoadIdentity();
+    glTranslatef(500 + 60 + xx, y + 2, 0);
+    glScalef(24, 14, 14);
+    glutSolidCube(1);
+
+    glColor3f(0.5f, 0.5f, 0.5f);
+    glLoadIdentity();
+    glTranslatef(500 + xx, y - 4, 0);
+    glScalef(40, 20, 60);
+
+    // wings
+    glBegin(GL_TRIANGLES);
+    glVertex3f(-1, 0, -0);
+    glVertex3f(1, 0, -0);
+    glVertex3f(2, -1, 2);
+
+    glVertex3f(-2, 0.6f, -0);
+    glVertex3f(-1, 1.0f, -0);
+    glVertex3f(-2.5, 1.5, 0);
+    glEnd();
+
+
+    glPopMatrix();
+
+}
+
+///*** Circle_Model***///
+void circle(GLdouble rad)
+{
+    GLint points = 50;
+    GLdouble delTheta = (2.0 * PI) / (GLdouble)points;
+    GLdouble theta = 0.0;
+
+    glBegin(GL_POLYGON);
+    {
+        for (i = 0; i <= 50; i++, theta += delTheta)
+        {
+            glVertex2f(rad * cos(theta), rad * sin(theta));
+        }
+    }
+    glEnd();
+}
+
+
+
 ///*** Lamp ***///
 void lamp_stand(GLfloat x, GLfloat y, GLfloat z)
 {
@@ -110,57 +220,11 @@ void lamp(GLfloat x, GLfloat y, GLfloat z)
 }
 
 
-///*** Circle_Model***///
-void circle(GLdouble rad)
-{
-    GLint points = 50;
-    GLdouble delTheta = (2.0 * PI) / (GLdouble)points;
-    GLdouble theta = 0.0;
-
-    glBegin(GL_POLYGON);
-    {
-        for (i = 0; i <= 50; i++, theta += delTheta)
-        {
-            glVertex2f(rad * cos(theta), rad * sin(theta));
-        }
-    }
-    glEnd();
-}
 
 
 
 
-// Moon
-void Moon_Model() {
-    glPushMatrix();
-    glColor3f(1.25, 0.924, 0.930);
-    glTranslatef(900, 430, -16);
-    glutSolidSphere(48, 32, 32);
-    glPopMatrix();
 
-    glPushMatrix();
-    glColor3f(0.2, 0.30588, 0.50196);
-    glTranslatef(880, 440, -16);
-    glutSolidSphere(40, 32, 32);
-    glPopMatrix();
-
-}
-
-/// *** Sun_Model **///
-void Sun_Model() {
-    glPushMatrix();
-    glTranslatef(500, 0, -16);
-    glutSolidSphere(30, 32, 32);
-    glPopMatrix();
-
-}
-void Moving_Sun_Model() {
-    glPushMatrix();
-    glRotatef(-sun_spin, 0, 0, -.009);
-    Sun_Model();
-    glPopMatrix();
-
-}
 // Our House 
 void HOUSE() {
 
@@ -1444,62 +1508,6 @@ void drawingFlowers() {
 
 
 }
-
-// drawing airplane model 
-void Airplane_Model()
-{
-    // static because we need the value between frames
-    static float xx = -500;
-    float y = 400;
-    xx += 4;
-    if (xx >= 500) xx = -500;
-    glPushMatrix();
-    glLoadIdentity();
-    glDisable(GL_LIGHTING);
-
-    // drawing the maing part of the airplane
-    glLoadIdentity();
-    glTranslatef(500 + xx, y, 0);
-    glRotatef(90, 0, 0, 1);
-    glScalef(5, 30, 10);
-    glutSolidSphere(3, 20, 20);
-
-    // drawing black windows
-    glColor3f(0.f, 0.f, 0.f);
-    for (int x = -30; x <= 30; x += 30)
-    {
-        glLoadIdentity();
-        glTranslatef(500 + x + xx, y + 7, 0);
-        glScalef(20, 10, 10);
-        glutSolidCube(1);
-    }
-    // drawing black window (the big one)
-    glLoadIdentity();
-    glTranslatef(500 + 60 + xx, y + 2, 0);
-    glScalef(24, 14, 14);
-    glutSolidCube(1);
-
-    glColor3f(0.5f, 0.5f, 0.5f);
-    glLoadIdentity();
-    glTranslatef(500 + xx, y - 4, 0);
-    glScalef(40, 20, 60);
-
-    // wings
-    glBegin(GL_TRIANGLES);
-    glVertex3f(-1, 0, -0);
-    glVertex3f(1, 0, -0);
-    glVertex3f(2, -1, 2);
-
-    glVertex3f(-2, 0.6f, -0);
-    glVertex3f(-1, 1.0f, -0);
-    glVertex3f(-2.5, 1.5, 0);
-    glEnd();
-
-
-    glPopMatrix();
-
-}
-
 void SnowMan_Model()
 {
     const float PI1 = 3.1415926f;
@@ -1542,60 +1550,59 @@ void SnowMan_Model()
         glColor3f(0.8f, 0.8f, 0.8f);							// Circle Inner Color
         float x = (float)cos(i * dTheta1) * radius + 0.0f;		// + 0.0f position of X Axis // Need to convert i to radians 
 
-        glColor3f(0.6f, 0.6f, 0.6f);							// Circle Outter Color
-        float y = (float)sin(i * dTheta1) * radius + -0.1f;		// + 0.4f position of Y Axis // Need to convert i to radians 
+        glColor3f(0.6f, 0.6f, 0.6f);							
+        float y = (float)sin(i * dTheta1) * radius + -0.1f;		 
         glVertex2f(x, y);
     }
 
     glEnd();
-    radius = 0.035f;										// Radius of cirlce = How big you want your circle to be.
+    radius = 0.035f;										
 
-    glBegin(GL_TRIANGLE_FAN);									// Create Triangle
+    glBegin(GL_TRIANGLE_FAN);								
 
-    glColor3f(1.0f, 1.0f, 1.0f);							// Circle Inner Color
-    glVertex2f(-0.1f, -0.05f);									// origin = centre of circle
+    glColor3f(1.0f, 1.0f, 1.0f);							
+    glVertex2f(-0.1f, -0.05f);									
 
     dTheta = (float)(2.0f * PI) / segments;
 
-    glColor3f(0.0f, 0.0f, 0.0f);							// Circle Outter Color
+    glColor3f(0.0f, 0.0f, 0.0f);							
     for (int i = 0; i <= segments; i++)
     {
-        float x = (float)cos(i * dTheta) * radius + -0.1f;		// + 0.0f position of X Axis // Need to convert i to radians 
-        float y = (float)sin(i * dTheta) * radius + -0.05f;		// + 0.4f position of Y Axis // Need to convert i to radians 
+        float x = (float)cos(i * dTheta) * radius + -0.1f;		
+        float y = (float)sin(i * dTheta) * radius + -0.05f;		
         glVertex2f(x, y);
     }
     glEnd();
-    radius = 0.035f;										// Radius of cirlce = How big you want your circle to be.
+    radius = 0.035f;										
 
-    glBegin(GL_TRIANGLE_FAN);									// Create Triangle
+    glBegin(GL_TRIANGLE_FAN);									
 
-    glColor3f(1.0f, 1.0f, 1.0f);							// Circle Inner Color
-    glVertex2f(0.1f, -0.05f);									// origin = centre of circle
+    glColor3f(1.0f, 1.0f, 1.0f);							
+    glVertex2f(0.1f, -0.05f);									
 
     dTheta = (float)(2.0f * PI) / segments;
 
-    glColor3f(0.0f, 0.0f, 0.0f);							// Circle Outter Color
+    glColor3f(0.0f, 0.0f, 0.0f);							
     for (int i = 0; i <= segments; i++)
     {
-        float x = (float)cos(i * dTheta) * radius + 0.1f;		// + 0.0f position of X Axis // Need to convert i to radians 
-        float y = (float)sin(i * dTheta) * radius + -0.05f;		// + 0.4f position of Y Axis // Need to convert i to radians 
+        float x = (float)cos(i * dTheta) * radius + 0.1f;		
+        float y = (float)sin(i * dTheta) * radius + -0.05f;		
         glVertex2f(x, y);
     }
     glEnd();
-    radius = 0.03f;										// Radius of cirlce = How big you want your circle to be.
+    radius = 0.03f;										
 
-    glBegin(GL_TRIANGLE_FAN);									// Create Triangle
-
-    glColor3f(1.0f, 1.0f, 1.0f);							// Circle Inner Color
-    glVertex2f(0.0f, -0.15f);									// origin = centre of circle
+    glBegin(GL_TRIANGLE_FAN);									
+    glColor3f(1.0f, 1.0f, 1.0f);							
+    glVertex2f(0.0f, -0.15f);									
 
     dTheta = (float)(2.0f * PI) / segments;
 
     for (int i = 0; i <= segments; i++)
     {
-        glColor3f(1.0f, 0.5f, 0.0f);							// Circle Outter Color
-        float x = (float)cos(i * dTheta) * radius + 0.0f;		// + 0.0f position of X Axis // Need to convert i to radians 
-        float y = (float)sin(i * dTheta) * radius + -0.15f;		// + 0.4f position of Y Axis // Need to convert i to radians 
+        glColor3f(1.0f, 0.5f, 0.0f);							
+        float x = (float)cos(i * dTheta) * radius + 0.0f;	
+        float y = (float)sin(i * dTheta) * radius + -0.15f;		
         glVertex2f(x, y);
     }
     glEnd();
