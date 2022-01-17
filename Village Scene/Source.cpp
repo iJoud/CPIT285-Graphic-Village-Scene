@@ -2019,7 +2019,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(1200, 1200);
     glEnable(GL_DEPTH_TEST);
     glutCreateWindow("Smart Village");
-    init();
+    init(); // Start Drawing 
     glutDisplayFunc(display);
     glutIdleFunc(display);
     glutKeyboardFunc(processKeyboard);
